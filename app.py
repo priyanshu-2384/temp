@@ -54,7 +54,6 @@ def index():
 @app.route('/run_script')
 def run_script():
     proxy_ip = get_proxy_ip()
-    print("Helloooooooooooo")
 
     # Configure Chrome options
     chrome_options = Options()
