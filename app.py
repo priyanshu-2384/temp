@@ -54,7 +54,7 @@ def index():
 @app.route('/run_script')
 def run_script():
     proxy_ip = get_proxy_ip()
-
+    print("Helloooo")
     # Configure Chrome options
     chrome_options = Options()
     chrome_options.add_argument("--headless")  # Run headlessly
@@ -63,6 +63,7 @@ def run_script():
     chrome_options.add_argument("--remote-debugging-port=9222")  # Avoid "DevToolsActivePort file doesn't exist"
     chrome_options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     chrome_options.add_argument('--start-maximized')  # Start with a maximized window
+    chrome_options.add_argument('--disable-software-rasterizer')
 
 
 
@@ -75,7 +76,7 @@ def run_script():
     try:
         # Open Twitter login page
         driver.get("https://x.com/login")  # Use 'https://x.com/login' for the latest Twitter login page
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//input[@autocomplete="username"]')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//input[@autocomplete="username"]')))
 
         # Enter username
         username = driver.find_element(By.XPATH, '//input[@autocomplete="username"]')
@@ -86,7 +87,7 @@ def run_script():
         next_button.click()
 
         # Wait for password field to appear on the next page
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//input[@autocomplete="current-password"]')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//input[@autocomplete="current-password"]')))
 
         # Find password field and enter the password
         password = driver.find_element(By.XPATH, '//input[@autocomplete="current-password"]')
@@ -97,11 +98,11 @@ def run_script():
         login_button.click()
 
         # Wait for homepage to load after login
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='primaryColumn']")))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='primaryColumn']")))
 
          # Navigate to the homepage
         driver.get("https://x.com/explore/tabs/for-you")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='cellInnerDiv']")))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='cellInnerDiv']")))
 
         trending_div = driver.find_elements(By.XPATH, "//div[@data-testid='cellInnerDiv']")
         trends = []
