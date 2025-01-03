@@ -100,21 +100,20 @@ def run_script():
         # Wait for homepage to load after login
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='primaryColumn']")))
 
-        # Navigate to the homepage
-        driver.get("https://x.com/home")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='css-175oi2r r-1adg3ll r-1ny4l3l']")))
+         # Navigate to the homepage
+        driver.get("https://x.com/explore/tabs/for-you")
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='cellInnerDiv']")))
 
-        trending_div = driver.find_elements(By.XPATH, "//div[@class='css-175oi2r r-1adg3ll r-1ny4l3l']")
+        trending_div = driver.find_elements(By.XPATH, "//div[@data-testid='cellInnerDiv']")
         trends = []
         for sub_div in trending_div:
-            elements = sub_div.find_elements(By.XPATH, './/div[@style="text-overflow: unset; color: rgb(231, 233, 234);"]')
+            elements = sub_div.find_elements(By.XPATH, "//div[@class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1bymd8e']")
             for element in elements:
                 trends.append(element.text)
-        
+
         # Get the top 5 trends
         length = min(5, len(trends))
         top_trends = trends[:length]
-
         # Create a unique record with the scraped data, timestamp, and proxy IP address
         unique_id = str(uuid.uuid4())
 
