@@ -69,7 +69,7 @@ def run_script():
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
-
+    print(driver)
 
 
 
@@ -77,7 +77,7 @@ def run_script():
         # Open Twitter login page
         driver.get("https://x.com/login")  # Use 'https://x.com/login' for the latest Twitter login page
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//input[@autocomplete="username"]')))
-
+        print("yess1")
         # Enter username
         username = driver.find_element(By.XPATH, '//input[@autocomplete="username"]')
         username.send_keys("priyanshu_2384")  # Replace with your username
@@ -85,7 +85,7 @@ def run_script():
         # Click the "Next" button after entering username
         next_button = driver.find_element(By.XPATH, '//span[text()="Next"]')
         next_button.click()
-
+        print("yess2")
         # Wait for password field to appear on the next page
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//input[@autocomplete="current-password"]')))
 
@@ -103,20 +103,23 @@ def run_script():
          # Navigate to the homepage
         driver.get("https://x.com/explore/tabs/for-you")
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@data-testid='cellInnerDiv']")))
-
+        print("yess3")
         trending_div = driver.find_elements(By.XPATH, "//div[@data-testid='cellInnerDiv']")
         trends = []
+        print("yess4")
         for sub_div in trending_div:
             elements = sub_div.find_elements(By.XPATH, "//div[@class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1bymd8e']")
             for element in elements:
                 trends.append(element.text)
-
+        
+        print(trends)
         # Get the top 5 trends
         length = min(5, len(trends))
         top_trends = trends[:length]
         # Create a unique record with the scraped data, timestamp, and proxy IP address
         unique_id = str(uuid.uuid4())
 
+        print(top_trends)
         data = {
             "_id": unique_id,
             "trend1": top_trends[0],
