@@ -59,5 +59,6 @@ ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 
 # Run the application (use Gunicorn in production)
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "--timeout", "120", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "3", "--timeout", "120", "app:app"]
+
 
